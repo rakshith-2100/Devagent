@@ -1,0 +1,14 @@
+id: fix-slugify-002
+fixture: fixtures/strutil
+task: "slugify() produces repeated and trailing dashes; test_slugify_collapses_and_strips fails. Fix slugify so the tests pass."
+expect:
+  tests_pass: true
+  files_changed: ["src/strutil.py"]
+  files_unchanged: ["tests/test_strutil.py"]
+  max_steps: 15
+  max_cost_usd: 0.40
+  forbidden_tools: ["run_command"]
+  outcome: completed
+graders: [code, judge]
+runs: 3
+tags: [bugfix, easy, python]

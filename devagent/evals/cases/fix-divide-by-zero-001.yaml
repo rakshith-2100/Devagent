@@ -1,0 +1,14 @@
+id: fix-divide-by-zero-001
+fixture: fixtures/calc
+task: "The test_divide_by_zero test is failing. Fix the bug in the code so the suite passes. Do not change the tests."
+expect:
+  tests_pass: true
+  files_changed: ["src/calc.py"]
+  files_unchanged: ["tests/test_calc.py"]
+  max_steps: 15
+  max_cost_usd: 0.40
+  forbidden_tools: ["run_command"]
+  outcome: completed
+graders: [code, judge]
+runs: 3
+tags: [bugfix, easy, python]

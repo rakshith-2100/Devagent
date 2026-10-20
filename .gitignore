@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------------
+# Secrets. Never commit credentials. Keep placeholders in .env.example only.
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials
+credentials.json
+# scratch files that hold raw API keys
+bedrock.txt
+openrouter.txt
+*apikey*
+*api_key*
+*secret*
+
+# ---------------------------------------------------------------------------
+# devagent runtime data (sessions, traces, prompt logs, worktrees)
+# ---------------------------------------------------------------------------
+.devagent/
+NOTES.md
+sessions.sqlite*
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# ---------------------------------------------------------------------------
+# Node (the throwaway app agents build while testing)
+# ---------------------------------------------------------------------------
+node_modules/
+test_react/
+
+# ---------------------------------------------------------------------------
+# Editors and OS
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+.claude/
+*.swp
+.DS_Store
+Thumbs.db

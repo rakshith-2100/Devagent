@@ -1,0 +1,43 @@
+{
+  "_comment": "Scripted model responses for an offline dry run against devagent/evals/fixtures/calc. Use: devagent --mock examples/mock_happy.json --goal 'fix the divide test'  (run inside a copy of the calc fixture that has at least one commit) or: devagent eval --mock examples/mock_happy.json --case fix-divide-by-zero-001 --runs 1",
+  "responses": [
+    {
+      "text": "I'll start by reading the calculator module and laying out a plan.",
+      "tool_calls": [
+        {"name": "update_plan", "args": {"steps": [
+          {"title": "Read src/calc.py and the failing test", "status": "in_progress"},
+          {"title": "Guard divide() against b == 0", "status": "pending"},
+          {"title": "Run the tests", "status": "pending"}
+        ]}},
+        {"name": "read_file", "args": {"path": "src/calc.py"}}
+      ]
+    },
+    {
+      "text": "divide() returns a / b with no guard, so b == 0 raises ZeroDivisionError instead of ValueError.",
+      "tool_calls": [
+        {"name": "edit_file", "args": {
+          "path": "src/calc.py",
+          "old_string": "    return a / b\n",
+          "new_string": "    if b == 0:\n        raise ValueError(\"division by zero\")\n    return a / b\n"
+        }},
+        {"name": "append_notes", "args": {"text": "divide() in src/calc.py lacked a zero guard; added ValueError('division by zero')."}}
+      ]
+    },
+    {
+      "tool_calls": [
+        {"name": "update_plan", "args": {"steps": [
+          {"title": "Read src/calc.py and the failing test", "status": "done"},
+          {"title": "Guard divide() against b == 0", "status": "done"},
+          {"title": "Run the tests", "status": "in_progress"}
+        ]}},
+        {"name": "run_tests", "args": {}}
+      ]
+    },
+    {
+      "tool_calls": [{"name": "git_diff", "args": {}}]
+    },
+    {
+      "text": "- src/calc.py: `divide()` now raises `ValueError(\"division by zero\")` when `b == 0`.\n- Verified with `run_tests`: 5 passed.\n- Nothing further needed."
+    }
+  ]
+}
